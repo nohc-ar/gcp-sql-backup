@@ -32,7 +32,7 @@ The GCP SQL Backup Manager is a robust bash script designed to automate the proc
 
 1. **Download the script**:
    ```bash
-   wget https://your-repo.com/gcp_sql_backup_manager.sh
+   git clone https://your-repo.com/gcp_sql_backup_manager.sh
    chmod +x gcp_sql_backup_manager.sh
    ```
 
@@ -132,7 +132,7 @@ El GCP SQL Backup Manager es un script robusto de bash diseñado para automatiza
 
 1. **Descargar el script**:
    ```bash
-   wget https://tu-repo.com/gcp_sql_backup_manager.sh
+   git clone https://tu-repo.com/gcp_sql_backup_manager.sh
    chmod +x gcp_sql_backup_manager.sh
    ```
 
