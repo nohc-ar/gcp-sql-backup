@@ -31,7 +31,8 @@ graph TD
     C --> D{Encriptar?}
     D -->|Sí| E[Encriptar y eliminar original]
     D -->|No| F[Mantener backup original]
-``
+```
+
 
 ### Prerequisites
 
