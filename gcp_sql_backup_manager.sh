@@ -116,7 +116,7 @@ main() {
         # Paso 1: Exportar a GCS
         if gcs_uri=$(export_database "$db"); then
             # Paso 2: Descargar y encriptar
-            log "debug" "URI obtenida: $gcs_uri"  # Formato correcto
+            #log "debug" "URI obtenida: $gcs_uri"  # Formato correcto
             process_backup "$db" "$gcs_uri"
         fi
         
