@@ -98,6 +98,31 @@ process_backup() {
     fi
 }
 
+apply_retention_policy() {
+    log "info" "Aplicando política de retención: eliminando backups mayores de ${RETENTION_DAYS} días"
+    
+    local deleted_files=0
+    local error_flag=0
+    
+    # Buscar y eliminar recursivamente en BACKUP_DIR
+    find "${BACKUP_DIR}" -type f -mtime +${RETENTION_DAYS} -print0 | while IFS= read -r -d $'\0' file; do
+        if rm -f "$file"; then
+            log "info" "Eliminado: $file"
+            ((deleted_files++))
+        else
+            log "error" "Falló al eliminar: $file"
+            error_flag=1
+        fi
+    done
+
+    # Resultado final
+    if [ $error_flag -eq 0 ]; then
+        log "success" "Retención aplicada. Archivos eliminados: $deleted_files"
+    else
+        log "warning" "Retención aplicada con errores. Archivos eliminados: $deleted_files"
+    fi
+}
+
 main() {
     load_config
     log "info" "=== Iniciando proceso completo de backup ==="
@@ -123,6 +148,8 @@ main() {
         log "info" "DB: $db - Proceso completado"
     done
     
+    apply_retention_policy
+
     log "info" "=== Proceso finalizado ==="
 }
 
