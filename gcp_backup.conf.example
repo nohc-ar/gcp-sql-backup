@@ -2,6 +2,7 @@
 CLOUD_SQL_INSTANCE="mi-instancia-prod"
 GCS_EXPORT_BUCKET="mi-bucket-backups"
 BACKUP_DIR="/backups/cloud-sql"
+RETENTION_DAYS=90
 
 # Opcionales
 ENCRYPTION_PASSPHRASE="secret-phrase"  # Dejar vacío para desactivar
