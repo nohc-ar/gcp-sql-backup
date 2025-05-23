@@ -40,8 +40,12 @@ load_config() {
 log() {
     local level="$1"
     local message="$2"
-    echo "[$(date '+%F %T')] [${level}] ${message}" | tee -a "$LOG_FILE"
+    echo "[$(date '+%F %T')] [${level}] ${message}" >> "$LOG_FILE"
+    # Opcional: Mostrar en consola también
+    echo "[$(date '+%F %T')] [${level}] ${message}" >&2
 }
+
+
 
 # Exportar base de datos a GCS
 export_database() {
@@ -51,9 +55,8 @@ export_database() {
     
     log "info" "DB: $db_name - Iniciando exportación a: $gcs_uri"
     
-    if ! gcloud sql export sql "${CLOUD_SQL_INSTANCE}" "${gcs_uri}" \
+    if ! gcloud sql export bak "${CLOUD_SQL_INSTANCE}" "${gcs_uri}" \
         --database="${db_name}" \
-        --timeout="${BACKUP_TIMEOUT}" \
         --quiet >/dev/null 2>&1; then
         log "error" "DB: $db_name - Falló la exportación"
         return 1
@@ -113,6 +116,7 @@ main() {
         # Paso 1: Exportar a GCS
         if gcs_uri=$(export_database "$db"); then
             # Paso 2: Descargar y encriptar
+            log "debug" "URI obtenida: $gcs_uri"  # Formato correcto
             process_backup "$db" "$gcs_uri"
         fi
         
