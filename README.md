@@ -26,7 +26,7 @@ Automated backup solution for Google Cloud SQL with encryption and retention pol
         F -->|Failure| K[Log Error]
         E -->|All Processed| L[Apply Retention]
         L --> M[End]
-``
+```
 
 ## Prerequisites
 - Google Cloud SDK (gcloud, gsutil)
