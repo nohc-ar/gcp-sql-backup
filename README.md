@@ -12,6 +12,7 @@ A secure bash script for downloading and encrypting Google Cloud SQL backups wit
 
 The GCP SQL Backup Manager is a robust bash script designed to automate the process of downloading the latest Cloud SQL backup from Google Cloud Storage and encrypting it locally using AES256 encryption. The script features external configuration management, comprehensive logging, and security validations.
 
+
 ### Features
 
 - **Automated Backup Retrieval**: Automatically identifies and downloads the latest backup from GCS
@@ -20,6 +21,18 @@ The GCP SQL Backup Manager is a robust bash script designed to automate the proc
 - **Comprehensive Logging**: Detailed timestamped logs for monitoring and troubleshooting
 - **Security Validations**: Verifies configuration file permissions and required dependencies
 - **Error Handling**: Robust error handling with proper exit codes
+
+### Diagram
+
+```mermaid
+graph TD
+    A[Inicio] --> B[Exportar DB a GCS]
+    B --> C[Descargar de GCS]
+    C --> D{Encriptar?}
+    D -->|Sí| E[Encriptar y eliminar original]
+    D -->|No| F[Mantener backup original]
+```
+
 
 ### Prerequisites
 
