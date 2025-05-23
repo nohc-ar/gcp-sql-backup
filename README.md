@@ -24,13 +24,14 @@ The GCP SQL Backup Manager is a robust bash script designed to automate the proc
 
 ### Diagram
 
+```mermaid
 graph TD
     A[Inicio] --> B[Exportar DB a GCS]
     B --> C[Descargar de GCS]
     C --> D{Encriptar?}
     D -->|Sí| E[Encriptar y eliminar original]
     D -->|No| F[Mantener backup original]
-
+``
 
 ### Prerequisites
 
